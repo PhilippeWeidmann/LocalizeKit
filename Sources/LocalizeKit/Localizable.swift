@@ -65,6 +65,24 @@ extension String: Localizable {
         }
     }
 
+    public func pluralLocalizedAttributedForLabel(_ label: UILabel, with number: Int) -> NSAttributedString? {
+        if let result = pluralform(Locale.current.languageCode, Int32(number)) {
+            let key = "\(self)##{\(String(cString: result))}"
+            return key.localizedAttributedForLabel(label, with: number)
+        } else {
+            return nil
+        }
+    }
+
+    public func pluralLocalizedAttributedForLabel(_ label: UILabel, with number: Float) -> NSAttributedString? {
+        if let result = pluralformf(Locale.current.languageCode, number) {
+            let key = "\(self)##{\(String(cString: result))}"
+            return key.localizedAttributedForLabel(label, with: number)
+        } else {
+            return nil
+        }
+    }
+
     public func localizedAttributedForLabel(_ label: UILabel, with arguments: CVarArg...) -> NSAttributedString? {
         return try? NSMutableAttributedString(data: (String(format: self.localized, locale: Locale.current, arguments: arguments)).data(using: .utf8)!, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil).with(font: label.font, color: label.textColor)
     }
