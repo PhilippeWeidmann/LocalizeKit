@@ -34,7 +34,7 @@ extension String: Localizable {
     }
 
     public func localizedWith(_ arguments: CVarArg...) -> String {
-        return String(format: self.localized, locale: Locale.current, arguments: arguments)
+        return String(format: self.localized, locale: nil, arguments: arguments)
     }
 
     public func pluralLocalizedWith(_ number: Int) -> String {
@@ -84,7 +84,7 @@ extension String: Localizable {
     }
 
     public func localizedAttributedForLabel(_ label: UILabel, with arguments: CVarArg...) -> NSAttributedString? {
-        return try? NSMutableAttributedString(data: (String(format: self.localized, locale: Locale.current, arguments: arguments)).data(using: .utf8)!, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil).with(font: label.font, color: label.textColor)
+        return try? NSMutableAttributedString(data: (String(format: self.localized, locale: nil, arguments: arguments)).data(using: .utf8)!, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil).with(font: label.font, color: label.textColor)
     }
 
     public func localizedAttributedForLabel(_ label: UILabel) -> NSAttributedString? {
